@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HereKeep — Coming Soon</title>
+  <meta name="description" content="For Here Seekers and Content Keepers. The all-in-one platform for service-based content creators. Coming soon.">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    :root {
+      --here: #1D4ED8;
+      --here-light: #3B82F6;
+      --here-glow: rgba(29, 78, 216, 0.15);
+      --keep: #E07B4C;
+      --keep-light: #F4A87A;
+      --keep-glow: rgba(224, 123, 76, 0.15);
+      --mallard: #0D9488;
+      --mallard-light: #14B8A6;
+      --mallard-glow: rgba(13, 148, 136, 0.2);
+      --ink: #1a1d24;
+      --charcoal: #2d3748;
+      --slate: #64748b;
+      --mist: #94A3B8;
+      --cloud: #E2E8F0;
+      --snow: #F8FAFC;
+      --white: #FFFFFF;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 300;
+      background: var(--snow);
+      color: var(--ink);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes breathe {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.05); opacity: 0.7; }
+    }
+    
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 0 0 var(--mallard-glow); }
+      50% { box-shadow: 0 0 0 10px transparent; }
+    }
+    
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    .fade-up {
+      animation: fadeUp 1s ease-out forwards;
+    }
+    
+    .fade-up-delay-1 { animation-delay: 0.2s; opacity: 0; }
+    .fade-up-delay-2 { animation-delay: 0.4s; opacity: 0; }
+    .fade-up-delay-3 { animation-delay: 0.6s; opacity: 0; }
+    .fade-up-delay-4 { animation-delay: 0.8s; opacity: 0; }
+    
+    /* Hero Section */
+    .hero {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 60px 40px;
+      position: relative;
+      overflow: hidden;
+      min-height: 100vh;
+    }
+    
+    /* Ambient Background */
+    .ambient {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    
+    .ambient-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      animation: breathe 12s ease-in-out infinite;
+    }
+    
+    .orb-here {
+      width: 600px;
+      height: 600px;
+      background: var(--here-glow);
+      top: -15%;
+      left: -10%;
+    }
+    
+    .orb-keep {
+      width: 500px;
+      height: 500px;
+      background: var(--keep-glow);
+      bottom: -10%;
+      right: -10%;
+      animation-delay: 3s;
+    }
+    
+    .orb-mallard {
+      width: 300px;
+      height: 300px;
+      background: var(--mallard-glow);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation-delay: 1.5s;
+    }
+    
+    /* Content */
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 700px;
+    }
+    
+    /* Logo - Shared E */
+    .logo {
+      margin-bottom: 48px;
+    }
+    
+    .logo-wordmark {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(56px, 12vw, 88px);
+      font-weight: 400;
+      letter-spacing: -2px;
+      line-height: 1;
+    }
+    
+    .logo-wordmark .here-part {
+      color: var(--here);
+    }
+    
+    .logo-wordmark .shared-e {
+      background: linear-gradient(90deg, var(--here) 0%, var(--mallard) 50%, var(--keep) 100%);
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientShift 8s ease-in-out infinite;
+    }
+    
+    .logo-wordmark .keep-part {
+      color: var(--keep);
+    }
+    
+    /* Tagline */
+    .tagline {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(20px, 4vw, 28px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--slate);
+      margin-bottom: 40px;
+      line-height: 1.5;
+    }
+    
+    .tagline .here {
+      color: var(--here);
+      font-style: normal;
+    }
+    
+    .tagline .keep {
+      color: var(--keep);
+      font-style: normal;
+    }
+    
+    /* Description */
+    .description {
+      font-size: 18px;
+      color: var(--slate);
+      margin-bottom: 48px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.8;
+    }
+    
+    /* Email Signup */
+    .signup-form {
+      display: flex;
+      gap: 12px;
+      max-width: 440px;
+      margin: 0 auto 24px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .email-input {
+      flex: 1;
+      min-width: 240px;
+      padding: 16px 24px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      border: 2px solid var(--cloud);
+      border-radius: 12px;
+      background: var(--white);
+      color: var(--ink);
+      transition: all 0.3s ease;
+    }
+    
+    .email-input:focus {
+      outline: none;
+      border-color: var(--mallard);
+      box-shadow: 0 0 0 4px var(--mallard-glow);
+    }
+    
+    .email-input::placeholder {
+      color: var(--mist);
+    }
+    
+    .submit-btn {
+      padding: 16px 32px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--white);
+      background: var(--mallard);
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .submit-btn:hover {
+      background: var(--mallard-light);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px var(--mallard-glow);
+    }
+    
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+    
+    .form-note {
+      font-size: 14px;
+      color: var(--mist);
+    }
+    
+    /* Coming Soon Badge */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: var(--white);
+      border: 1px solid var(--cloud);
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--slate);
+      margin-bottom: 40px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    }
+    
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--mallard);
+      border-radius: 50%;
+      animation: pulseGlow 2s ease-in-out infinite;
+    }
+    
+    /* Footer */
+    .footer {
+      padding: 32px 40px;
+      text-align: center;
+      border-top: 1px solid var(--cloud);
+      background: var(--white);
+    }
+    
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    
+    .footer-link {
+      font-size: 14px;
+      color: var(--slate);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-link:hover {
+      color: var(--mallard);
+    }
+    
+    .copyright {
+      font-size: 13px;
+      color: var(--mist);
+    }
+    
+    /* Responsive */
+    @media (max-width: 600px) {
+      .hero {
+        padding: 40px 24px;
+      }
+      
+      .signup-form {
+        flex-direction: column;
+      }
+      
+      .email-input {
+        min-width: 100%;
+      }
+      
+      .submit-btn {
+        width: 100%;
+      }
+      
+      .footer-links {
+        gap: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero Section -->
+  <section class="hero">
+    <!-- Ambient Background -->
+    <div class="ambient">
+      <div class="ambient-orb orb-here"></div>
+      <div class="ambient-orb orb-keep"></div>
+      <div class="ambient-orb orb-mallard"></div>
+    </div>
+    
+    <!-- Content -->
+    <div class="hero-content">
+      <!-- Badge -->
+      <div class="badge fade-up">
+        <span class="badge-dot"></span>
+        Coming Soon
+      </div>
+      
+      <!-- Logo - Shared E connects Here and Keep -->
+      <div class="logo fade-up fade-up-delay-1">
+        <div class="logo-wordmark">
+          <span class="here-part">Her</span><span class="shared-e">e</span><span class="keep-part">Keep</span>
+        </div>
+      </div>
+      
+      <!-- Tagline -->
+      <p class="tagline fade-up fade-up-delay-2">
+        For <span class="here">Here</span> Seekers and Content <span class="keep">Keepers</span>
+      </p>
+      
+      <!-- Description -->
+      <p class="description fade-up fade-up-delay-3">
+        The all-in-one platform for service-based content creators. 
+        Organize, correlate, and deliver your work—so your clients can be present while you keep their moments safe.
+      </p>
+      
+      <!-- Email Signup -->
+      <form class="signup-form fade-up fade-up-delay-4" action="#" method="POST">
+        <input 
+          type="email" 
+          class="email-input" 
+          placeholder="Enter your email" 
+          required
+          aria-label="Email address"
+        >
+        <button type="submit" class="submit-btn">Get Early Access</button>
+      </form>
+      
+      <p class="form-note fade-up fade-up-delay-4">Be the first to know when we launch.</p>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <nav class="footer-links">
+      <a href="mailto:hello@herekeep.com" class="footer-link">Contact</a>
+      <a href="#" class="footer-link">Instagram</a>
+      <a href="#" class="footer-link">LinkedIn</a>
+    </nav>
+    <p class="copyright">© 2026 HereKeep. All rights reserved.</p>
+  </footer>
+</body>
+</html>
